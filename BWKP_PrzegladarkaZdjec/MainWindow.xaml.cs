@@ -91,6 +91,8 @@ namespace BWKP_PrzegladarkaZdjec
             ResizeImage();
         }
 
+       
+
         private void FitScreen(object sender, RoutedEventArgs e)
         {
             if (paths.Count == 0) return;
@@ -104,6 +106,36 @@ namespace BWKP_PrzegladarkaZdjec
             if(paths.Count == 0) return;
             rotation = (Rotation)((int)(rotation + 1) % 4);
             DisplayImage(displayedImageIndex);
+        }
+
+        private void ZoomIn(object sender, RoutedEventArgs e)
+        {
+            if (paths.Count == 0) return;
+            if ((int)Math.Round(size / 20.0) * 20 < 200)
+            {
+                fitBtn.IsEnabled = true;
+                originalBtn.IsEnabled = true;
+                size = (int)Math.Round(size / 20.0) * 20;
+                size += 20;
+                Image.Width = displayedImage.Width * size / 100;
+                Image.Height = displayedImage.Height * size / 100;
+                Size.Content = size.ToString() + "%";
+            }
+        }
+
+        private void ZoomOut(object sender, RoutedEventArgs e)
+        {
+            if (paths.Count == 0) return;
+            if ((int)Math.Round(size / 20.0) * 20 > 20)
+            {
+                fitBtn.IsEnabled = true;
+                originalBtn.IsEnabled = true;
+                size = (int)Math.Round(size / 20.0) * 20;
+                size -= 20;
+                Image.Width = displayedImage.Width * size / 100;
+                Image.Height = displayedImage.Height * size / 100;
+                Size.Content = size.ToString() + "%";
+            }
         }
     }
 }
