@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -27,6 +28,30 @@ namespace BWKP_PrzegladarkaZdjec
             InitializeComponent();
         }
 
+        private void OpenDirectory(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.Description = "Wybierz folder";
+            dialog.UseDescriptionForTitle = true;
 
+            if(dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                paths.Clear();
+                string[] extensions = new string[] { ".png", ".gif", ".jpg", ".jpeg", ".bmp" };
+                foreach( string extension in extensions )
+                    Directory.GetFiles(dialog.SelectedPath, "*" + extension);
+
+                if(paths.Count > 0 )
+                {
+                    rotation = 0;
+                    displayedImage();
+                }
+                else
+                {
+                    displayedImageIndex = 0;
+                    Image.Source = null;
+                }
+            }
+        }
     }
 }
