@@ -53,5 +53,23 @@ namespace BWKP_PrzegladarkaZdjec
                 }
             }
         }
+
+        private void ShowPrevious(object sender, RoutedEventArgs e)
+        {
+            if(displayedImageIndex > 0)
+            {
+                rotation = 0;
+                displayedImage(displayedImageIndex - 1);
+            }
+        }
+
+        private void ShowNext(object sender, RoutedEventArgs e)
+        {
+            if (displayedImageIndex < paths.Count - 1)
+            {
+                rotation = 0;
+                displayedImage(displayedImageIndex + 1);
+            }
+        }
     }
 }
