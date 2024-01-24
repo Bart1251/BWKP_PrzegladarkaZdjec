@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BWKP_PrzegladarkaZdjec"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" SizeChanged="WindowResize">
     <Grid Background="#333333">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -27,7 +27,7 @@
             <Button Background="Transparent" 
                     Height="30" 
                     Grid.Column="1" 
-                    BorderThickness="0">
+                    BorderThickness="0" Click="Rotate">
                 <Button.Content>
                     <Image Source="rotate.png"/>
                 </Button.Content>
@@ -46,7 +46,7 @@
             <Button Background="Transparent" 
                     Height="30" 
                     Grid.Column="0" 
-                    BorderThickness="0">
+                    BorderThickness="0" Click="ShowPrevious">
                 <Button.Content>
                     <Image Source="previous.png"/>
                 </Button.Content>
@@ -57,9 +57,54 @@
             <Button Background="Transparent" 
                     Height="30" 
                     Grid.Column="2" 
-                    BorderThickness="0">
+                    BorderThickness="0" Click="ShowNext">
                 <Button.Content>
                     <Image Source="next.png"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="100%" Foreground="White" Grid.Column="0"/>
+            <Button Background="Transparent" 
+                    Height="31" 
+                    Grid.Column="1" 
+                    BorderThickness="0" Click="ZoomIn">
+                <Button.Content>
+                    <Image Source="zoomin.png"/>
+                </Button.Content>
+            </Button>
+            <Button Background="Transparent" 
+                    Height="31" 
+                    Grid.Column="2" 
+                    BorderThickness="0" Click="ZoomOut">
+                <Button.Content>
+                    <Image Source="zoomout.png"/>
+                </Button.Content>
+            </Button>
+            <Button Background="Transparent" 
+                    Height="31" 
+                    Grid.Column="3" 
+                    BorderThickness="0" x:Name="fitBtn" Click="FitScreen">
+                <Button.Content>
+                    <Image Source="fitscreen.png"/>
+                </Button.Content>
+            </Button>
+            <Button Background="Transparent" 
+                    Height="31" 
+                    Grid.Column="4" 
+                    BorderThickness="0" x:Name="originalBtn" Click="OriginalSize">
+                <Button.Content>
+                    <Image Source="originalsize.png"/>
                 </Button.Content>
             </Button>
         </Grid>
