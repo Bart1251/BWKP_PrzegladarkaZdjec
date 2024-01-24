@@ -38,11 +38,14 @@ namespace BWKP_PrzegladarkaZdjec
             {
                 paths.Clear();
                 string[] extensions = new string[] { ".png", ".gif", ".jpg", ".jpeg", ".bmp" };
-                foreach( string extension in extensions )
-                    Directory.GetFiles(dialog.SelectedPath, "*" + extension);
+                foreach (string extension in extensions)
+                    paths.AddRange(Directory.GetFiles(dialog.SelectedPath, "*" + extension));
+                
 
-                if(paths.Count > 0 )
+                if (paths.Count > 0 )
                 {
+                    fitBtn.IsEnabled = false;
+                    originalBtn.IsEnabled = true;
                     rotation = 0;
                     DisplayImage(0);
                 }
@@ -57,12 +60,13 @@ namespace BWKP_PrzegladarkaZdjec
         private void DisplayImage(int i)
         {
             displayedImageIndex = i;
-            Name.Content = paths[i];
+            Name.Content = paths[i].Split("\\").Last();
             displayedImage = new BitmapImage();
             displayedImage.BeginInit();
             displayedImage.UriSource = new Uri(paths[i]);
             displayedImage.Rotation = rotation;
             displayedImage.EndInit();
+            Image.Source = displayedImage;
             ResizeImage();
         }
 
@@ -91,6 +95,11 @@ namespace BWKP_PrzegladarkaZdjec
             ResizeImage();
         }
 
+        private void WindowResize(object sender, RoutedEventArgs e)
+        {
+            if (paths.Count == 0) return;
+            ResizeImage();
+        }
        
 
         private void FitScreen(object sender, RoutedEventArgs e)
@@ -144,6 +153,7 @@ namespace BWKP_PrzegladarkaZdjec
                 OriginalFit();
             if (!fitBtn.IsEnabled)
                 ScreenFit();
+            Size.Content = size.ToString() + "%";
         }
 
         private void OriginalFit()
@@ -152,6 +162,7 @@ namespace BWKP_PrzegladarkaZdjec
             fitBtn.IsEnabled = true;
             Image.Width = displayedImage.Width;
             Image.Height = displayedImage.Height;
+            size = 100;
         }
 
         private void ScreenFit()
@@ -159,7 +170,7 @@ namespace BWKP_PrzegladarkaZdjec
             originalBtn.IsEnabled = true;
             fitBtn.IsEnabled = false;
 
-            if (displayedImage.Width > ImageGrid.ActualWidth)
+            if (displayedImage.Width > ImageGrid.ActualWidth - 60)
             {
                 Image.Width = ImageGrid.ActualWidth - 60;
                 Image.Height = displayedImage.Height * (ImageGrid.ActualWidth - 60) / displayedImage.Width;
@@ -188,7 +199,7 @@ namespace BWKP_PrzegladarkaZdjec
                 Image.Width = ImageGrid.ActualWidth - 60;
                 Image.Height = displayedImage.Height * (ImageGrid.ActualWidth - 60) / displayedImage.Width;
                 size = (int)((ImageGrid.ActualWidth - 60) / displayedImage.Width * 100);
-                if (displayedImage.Height * (ImageGrid.ActualWidth - 60) / displayedImage.Width > ImageGrid.Height)
+                if (displayedImage.Height * (ImageGrid.ActualWidth - 60) / displayedImage.Width > ImageGrid.ActualHeight)
                 {
                     Image.Height = ImageGrid.ActualHeight;
                     Image.Width = displayedImage.Width * ImageGrid.ActualHeight / displayedImage.Height;
