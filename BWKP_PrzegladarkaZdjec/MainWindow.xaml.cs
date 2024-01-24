@@ -107,7 +107,7 @@ namespace BWKP_PrzegladarkaZdjec
             if (paths.Count == 0) return;
             fitBtn.IsEnabled = false;
             originalBtn.IsEnabled = true;
-            ResizeImage();
+            ResizeImage(); 
         }
 
         private void Rotate(object sender, RoutedEventArgs e)
