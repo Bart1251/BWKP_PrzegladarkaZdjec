@@ -16,9 +16,17 @@ namespace BWKP_PrzegladarkaZdjec
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<string> paths = new List<string>();
+        private BitmapImage displayedImage;
+        private int displayedImageIndex = 0;
+        private Rotation rotation = 0;
+        private int size = 100;
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
+
     }
 }
