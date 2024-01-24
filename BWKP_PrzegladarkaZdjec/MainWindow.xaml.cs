@@ -44,7 +44,7 @@ namespace BWKP_PrzegladarkaZdjec
                 if(paths.Count > 0 )
                 {
                     rotation = 0;
-                    displayedImage();
+                    displayImage();
                 }
                 else
                 {
@@ -52,6 +52,18 @@ namespace BWKP_PrzegladarkaZdjec
                     Image.Source = null;
                 }
             }
+        }
+
+        private void DisplayImage(int i)
+        {
+            displayedImageIndex = i;
+            Name.Content = paths[i];
+            displayedImage = new BitmapImage();
+            displayedImage.BeginInit();
+            displayedImage.UriSource = new Uri(paths[i]);
+            displayedImage.Rotation = rotation;
+            displayedImage.EndInit();
+            ResizeImage();
         }
     }
 }

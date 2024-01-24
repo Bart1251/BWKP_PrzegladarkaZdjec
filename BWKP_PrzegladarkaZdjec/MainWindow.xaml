@@ -33,7 +33,7 @@
                 </Button.Content>
             </Button>
 
-            <Label FontSize="20" Content="Nazwa pliku" Grid.Column="2" Foreground="White" HorizontalContentAlignment="Right"/>
+            <Label FontSize="20" Content="Nazwa pliku" Grid.Column="2" Foreground="White" HorizontalContentAlignment="Right" x:Name="Name"/>
         </Grid>
 
         <Grid Grid.Row="1" x:Name="ImageGrid">
