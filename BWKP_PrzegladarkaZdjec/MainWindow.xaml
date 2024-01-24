@@ -23,7 +23,7 @@
             <Button Content="Wybierz folder" 
                     HorizontalAlignment="left" 
                     Click="OpenDirectory" 
-                    Grid.Column="0" Height="40"/>
+                    Grid.Column="0" Height="40" Background="#222222" Foreground="White"/>
             <Button Background="Transparent" 
                     Height="30" 
                     Grid.Column="1" 
@@ -64,7 +64,7 @@
             </Button>
         </Grid>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Background="#222222">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
