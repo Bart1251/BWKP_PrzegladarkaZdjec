@@ -59,7 +59,7 @@ namespace BWKP_PrzegladarkaZdjec
             if(displayedImageIndex > 0)
             {
                 rotation = 0;
-                displayedImage(displayedImageIndex - 1);
+                DisplayImage(displayedImageIndex - 1);
             }
         }
 
@@ -68,8 +68,23 @@ namespace BWKP_PrzegladarkaZdjec
             if (displayedImageIndex < paths.Count - 1)
             {
                 rotation = 0;
-                displayedImage(displayedImageIndex + 1);
+                DisplayImage(displayedImageIndex + 1);
             }
+        }
+        private void OriginalSize(object sender, RoutedEventArgs e)
+        {
+            if (paths.Count == 0) return;
+            fitBtn.IsEnabled = true;
+            originalBtn.IsEnabled = false;
+            ResizeImage();
+        }
+
+        private void FitScreen(object sender, RoutedEventArgs e)
+        {
+            if (paths.Count == 0) return;
+            fitBtn.IsEnabled = false;
+            originalBtn.IsEnabled = true;
+            ResizeImage();
         }
     }
 }
