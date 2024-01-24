@@ -5,9 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BWKP_PrzegladarkaZdjec"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        SizeChanged="WindowResize">
-    <Grid>
-        
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="#333333">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Wybierz folder" 
+                    HorizontalAlignment="left" 
+                    Click="OpenDirectory" 
+                    Grid.Column="0" Height="40"/>
+            <Button Background="Transparent" 
+                    Height="30" 
+                    Grid.Column="1" 
+                    BorderThickness="0">
+                <Button.Content>
+                    <Image Source="rotate.png"/>
+                </Button.Content>
+            </Button>
+
+            <Label FontSize="20" Content="Nazwa pliku" Grid.Column="2" Foreground="White" HorizontalContentAlignment="Right"/>
+        </Grid>
+
+        <Grid Grid.Row="1" x:Name="ImageGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Background="Transparent" 
+                    Height="30" 
+                    Grid.Column="0" 
+                    BorderThickness="0">
+                <Button.Content>
+                    <Image Source="previous.png"/>
+                </Button.Content>
+            </Button>
+
+            <Image x:Name="Image" Grid.Column="1"/>
+
+            <Button Background="Transparent" 
+                    Height="30" 
+                    Grid.Column="2" 
+                    BorderThickness="0">
+                <Button.Content>
+                    <Image Source="next.png"/>
+                </Button.Content>
+            </Button>
+        </Grid>
     </Grid>
 </Window>
