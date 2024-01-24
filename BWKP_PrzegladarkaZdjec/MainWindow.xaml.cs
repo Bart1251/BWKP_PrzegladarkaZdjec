@@ -83,5 +83,64 @@ namespace BWKP_PrzegladarkaZdjec
                 DisplayImage(displayedImageIndex + 1);
             }
         }
+
+        private void ResizeImage()
+        {
+            if (!originalBtn.IsEnabled)
+                OriginalFit();
+            if (!fitBtn.IsEnabled)
+                ScreenFit();
+        }
+
+        private void OriginalFit()
+        {
+            originalBtn.IsEnabled = false;
+            fitBtn.IsEnabled = true;
+            Image.Width = displayedImage.Width;
+            Image.Height = displayedImage.Height;
+        }
+
+        private void ScreenFit()
+        {
+            originalBtn.IsEnabled = true;
+            fitBtn.IsEnabled = false;
+
+            if (displayedImage.Width > ImageGrid.ActualWidth)
+            {
+                Image.Width = ImageGrid.ActualWidth - 60;
+                Image.Height = displayedImage.Height * (ImageGrid.ActualWidth - 60) / displayedImage.Width;
+                size = (int)((ImageGrid.ActualWidth - 60) / displayedImage.Width * 100);
+                if (displayedImage.Height * (ImageGrid.ActualWidth - 60) / displayedImage.Width > ImageGrid.Height)
+                {
+                    Image.Height = ImageGrid.ActualHeight;
+                    Image.Width = displayedImage.Width * ImageGrid.ActualHeight / displayedImage.Height;
+                    size = (int)(ImageGrid.ActualHeight / displayedImage.Height * 100);
+                }
+            }
+            else if (displayedImage.Height > ImageGrid.ActualHeight)
+            {
+                Image.Height = ImageGrid.ActualHeight;
+                Image.Width = displayedImage.Width * ImageGrid.ActualHeight / displayedImage.Height;
+                size = (int)(ImageGrid.ActualHeight / displayedImage.Height * 100);
+                if (displayedImage.Width * ImageGrid.ActualHeight / displayedImage.Height > ImageGrid.Width)
+                {
+                    Image.Width = ImageGrid.ActualWidth;
+                    Image.Height = displayedImage.Height * (ImageGrid.ActualWidth - 60) / displayedImage.Width;
+                    size = (int)((ImageGrid.ActualWidth - 60) / displayedImage.Width * 100);
+                }
+            }
+            else
+            {
+                Image.Width = ImageGrid.ActualWidth - 60;
+                Image.Height = displayedImage.Height * (ImageGrid.ActualWidth - 60) / displayedImage.Width;
+                size = (int)((ImageGrid.ActualWidth - 60) / displayedImage.Width * 100);
+                if (displayedImage.Height * (ImageGrid.ActualWidth - 60) / displayedImage.Width > ImageGrid.Height)
+                {
+                    Image.Height = ImageGrid.ActualHeight;
+                    Image.Width = displayedImage.Width * ImageGrid.ActualHeight / displayedImage.Height;
+                    size = (int)(ImageGrid.ActualHeight / displayedImage.Height * 100);
+                }
+            }
+        }
     }
 }
