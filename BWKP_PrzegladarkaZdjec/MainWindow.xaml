@@ -74,7 +74,7 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="100%" Foreground="White" Grid.Column="0"/>
+            <Label Content="100%" Foreground="White" Grid.Column="0" x:Name="Size"/>
             <Button Background="Transparent" 
                     Height="31" 
                     Grid.Column="1" 
