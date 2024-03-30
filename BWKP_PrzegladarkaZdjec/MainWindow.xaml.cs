@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.MessageBox;
 
 namespace BWKP_PrzegladarkaZdjec
 {
@@ -52,9 +53,33 @@ namespace BWKP_PrzegladarkaZdjec
                 else
                 {
                     displayedImageIndex = 0;
+                    Name.Content = "";
+                    Size.Content = "100%";
                     Image.Source = null;
                 }
             }
+        }
+        private void Delete(object sender, EventArgs e)
+        {
+            if(paths.Count == 0) return;
+            if (MessageBox.Show("Czy na pewno chcesz usunąć ten plik?", "Usuwanie", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes) return;
+            string pathToRemove = paths[displayedImageIndex];
+            paths.RemoveAt(displayedImageIndex);
+            if (paths.Count == displayedImageIndex)
+                displayedImageIndex--;
+            if (paths.Count > 0)
+            {
+                fitBtn.IsEnabled = false;
+                originalBtn.IsEnabled = true;
+                rotation = 0;
+                DisplayImage(displayedImageIndex);
+            }
+            else
+            {
+                displayedImageIndex = 0;
+                Image.Source = null;
+            }
+            File.Delete(pathToRemove);
         }
 
         private void DisplayImage(int i)
@@ -63,6 +88,8 @@ namespace BWKP_PrzegladarkaZdjec
             Name.Content = paths[i].Split("\\").Last();
             displayedImage = new BitmapImage();
             displayedImage.BeginInit();
+            displayedImage.CacheOption = BitmapCacheOption.OnLoad;
+            displayedImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
             displayedImage.UriSource = new Uri(paths[i]);
             displayedImage.Rotation = rotation;
             displayedImage.EndInit();

@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="delete.png" />
     <None Remove="fitscreen.png" />
     <None Remove="next.png" />
     <None Remove="originalsize.png" />
@@ -41,6 +42,12 @@
     <Content Include="zoomout.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="delete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
